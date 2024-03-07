@@ -23,17 +23,20 @@ def animated_tick():
         </div>
         <style>
             .tick-container {
-                width: 80px;
-                height: 80px;
+                width: 70px;
+                height: 70px;
                 overflow: hidden;
             }
 
             .tick {
-                font-size: 60px;
+                font-size: 50px;
                 color: #28a745; /* Green color */
-                line-height: 1.2;
+                line-height: 60px; /* Set line-height to match the container height */
+                text-align: center; /* Center the tick horizontally */
                 transform-origin: 50% 50%;
                 animation: tick-animation 0.5s ease-in-out;
+                border: 4px solid #28a745; /* Smaller border */
+                border-radius: 50%; /* Make the border square */
             }
 
             @keyframes tick-animation {
