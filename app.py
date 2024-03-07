@@ -1,5 +1,7 @@
 import streamlit as st
 import pickle
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
 
 def vectorize(text):
     
