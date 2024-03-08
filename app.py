@@ -16,7 +16,7 @@ def predict(vt):
     pred = model.predict(vt)
     return pred[0]
 
-def animated_tick():
+def green_tick():
     return """
         <div class="tick-container">
             <div class="tick">&#10003;</div>
@@ -30,13 +30,13 @@ def animated_tick():
 
             .tick {
                 font-size: 50px;
-                color: #28a745; /* Green color */
-                line-height: 60px; /* Set line-height to match the container height */
-                text-align: center; /* Center the tick horizontally */
+                color: #28a745;
+                line-height: 60px;
+                text-align: center;
                 transform-origin: 50% 50%;
                 animation: tick-animation 0.5s ease-in-out;
-                border: 4px solid #28a745; /* Smaller border */
-                border-radius: 50%; /* Make the border square */
+                border: 4px solid #28a745;
+                border-radius: 50%;
             }
 
             @keyframes tick-animation {
@@ -66,13 +66,13 @@ def main():
             with col1:
                 st.write("## NOCUOUS")
                 if pred == "NOCUOUS":
-                    st.markdown(animated_tick(), unsafe_allow_html=True) 
+                    st.markdown(green_tick(), unsafe_allow_html=True) 
             with col2:
                 st.write("## INNOCUOUS")
                 if pred == "INNOCUOUS":
-                    st.markdown(animated_tick(), unsafe_allow_html=True)
+                    st.markdown(green_tick(), unsafe_allow_html=True)
         else:
-            st.warning("Please enter some text before predicting.")
+            st.warning("Enter a Requirement to Proceed!")
 
 if __name__ == "__main__":
     main()
