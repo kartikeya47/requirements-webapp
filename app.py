@@ -117,8 +117,8 @@ def green_tick():
         </style>
     """
 
-
 def main():
+    
     st.title("Requirement Ambiguity Checker")
     
     input = st.text_area("Enter the requirement here:")
