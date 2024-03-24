@@ -14,7 +14,6 @@ def vectorize(text):
     
     vectorizer = pickle.load(open('models/VectorizerFinal.sav', 'rb'))
     X = vectorizer.transform([text])
-    print(X)
     return X
 
 def predict(vt):
@@ -91,7 +90,7 @@ def green_tick():
                 width: 70px;
                 height: 70px;
                 overflow: hidden;
-                margin-bottom: 10px;
+                margin-bottom: 18px;
             }
 
             .tick {
@@ -133,11 +132,12 @@ def main():
                 st.write("## NOCUOUS")
                 if pred == "NOCUOUS":
                     st.markdown(green_tick(), unsafe_allow_html=True)
-                    st.write("###### Resolved Requirement: " + coreference_resolution(input))
             with col2:
                 st.write("## INNOCUOUS")
                 if pred == "INNOCUOUS":
                     st.markdown(green_tick(), unsafe_allow_html=True)
+            if pred == "NOCUOUS":
+                st.write("###### Resolved Requirement: " + coreference_resolution(input))
         else:
             st.warning("Enter a Requirement to Proceed!")
 
