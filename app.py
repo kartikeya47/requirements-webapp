@@ -125,25 +125,32 @@ def green_tick():
 
 def main():
     
+    if "button_clicked" not in st.session_state:
+        st.session_state.button_clicked = False
+        
+    def callback():
+        st.session_state.button_clicked = True
+    
     st.title("Requirement Ambiguity Checker")
     
     input = st.text_area("Enter the requirement here:")
 
-    if st.button("Click to Check"):
+    if st.button("Click to Check", on_click=callback) or st.session_state.button_clicked:
         if input:
             vectorized_text = vectorize(input)
             pred = predict(vectorized_text)
             col1, col2 = st.columns(2)
             with col1:
-                st.write("## NOCUOUS")
-                if pred == "NOCUOUS":
-                    st.markdown(green_tick(), unsafe_allow_html=True)
-            with col2:
                 st.write("## INNOCUOUS")
                 if pred == "INNOCUOUS":
                     st.markdown(green_tick(), unsafe_allow_html=True)
+            with col2:
+                st.write("## NOCUOUS")
+                if pred == "NOCUOUS":
+                    st.markdown(green_tick(), unsafe_allow_html=True)
             if pred == "INNOCUOUS":
-                st.write("###### Resolved Requirement: " + coreference_resolution(input))
+                if st.button("Resolve Ambiguity"):
+                    st.write("###### Resolved Requirement: " + coreference_resolution(input))
         else:
             st.warning("Enter a Requirement to Proceed!")
 
