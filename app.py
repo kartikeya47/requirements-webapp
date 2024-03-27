@@ -142,7 +142,7 @@ def main():
                 st.write("## INNOCUOUS")
                 if pred == "INNOCUOUS":
                     st.markdown(green_tick(), unsafe_allow_html=True)
-            if pred == "NOCUOUS":
+            if pred == "INNOCUOUS":
                 st.write("###### Resolved Requirement: " + coreference_resolution(input))
         else:
             st.warning("Enter a Requirement to Proceed!")
