@@ -56,29 +56,35 @@ def replace_pronoun(sentence_dict, noun, pronoun, cluster_name):
 
 def coreference_resolution(original_sentence):
 
-  nlp = spacy.load("en_coreference_web_trf")
-  doc = nlp(original_sentence)
-  sentence_dict = doc.spans.data
-  dict_length = len(sentence_dict)
-  res = original_sentence
+    try:
 
-  for i in range(1, dict_length + 1):
-    cluster_name = f'coref_clusters_{i}'
-    second_sentence = sentence_dict[cluster_name][1]
-    noun, pronoun, more_sentences_bool = extract_noun_and_pronoun_from_dict(sentence_dict, cluster_name)
-    new_sentence = replace_pronoun(sentence_dict, noun, pronoun, cluster_name)
-    res = res.replace(str(second_sentence), str(new_sentence))
-    if(more_sentences_bool == 1):
-      sentences = original_sentence.split(" ")
-      replaced_sentence = []
-      for sentence in sentences:
-        if sentence == pronoun:
-          replaced_sentence.append(noun)
-        else:
-          replaced_sentence.append(sentence)
-      res = " ".join(replaced_sentence)
+        nlp = spacy.load("en_coreference_web_trf")
+        doc = nlp(original_sentence)
+        sentence_dict = doc.spans.data
+        dict_length = len(sentence_dict)
+        res = original_sentence
 
-  return res
+        for i in range(1, dict_length + 1):
+            cluster_name = f'coref_clusters_{i}'
+            second_sentence = sentence_dict[cluster_name][1]
+            noun, pronoun, more_sentences_bool = extract_noun_and_pronoun_from_dict(sentence_dict, cluster_name)
+            new_sentence = replace_pronoun(sentence_dict, noun, pronoun, cluster_name)
+            res = res.replace(str(second_sentence), str(new_sentence))
+            if(more_sentences_bool == 1):
+                sentences = original_sentence.split(" ")
+                replaced_sentence = []
+                for sentence in sentences:
+                    if sentence == pronoun:
+                        replaced_sentence.append(noun)
+                    else:
+                        replaced_sentence.append(sentence)
+                res = " ".join(replaced_sentence)
+
+        return res
+
+    except:
+    
+        return original_sentence
 
 def green_tick():
     return """
